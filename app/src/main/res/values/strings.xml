@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Fridge App</string>
+    <string-array name="sortbyOptions">
+        <item>Expiration Date</item>
+        <item>Name</item>
+        <item>Category</item>
+    </string-array>
+    <string-array name="categoryOptionsList">
+        <item>Other</item>
+        <item>Dairy</item>
+        <item>Produce</item>
+        <item>Meats</item>
+        <item>Beverages</item>
+    </string-array>
+    <string name="newItem">New Item</string>
+    <string name="categoryText">Category:</string>
+    <string name="nameText">Name:</string>
+    <string name="brandText">Brand:</string>
+    <string name="dateText">Exp Date:</string>
+    <string name="submitButton">Submit</string>
+    <string name="noInfoText">Please Fill The Necessary Fields!</string>
+    <string name="saveText">Save</string>
+    <string name="deleteText">Delete</string>
+    <string name="addToListText">Add to List</string>
+</resources>

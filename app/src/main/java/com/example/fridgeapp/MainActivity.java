@@ -85,11 +85,18 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
         {
             Item updatedItem = data.getParcelableExtra("updatedItem");
             int itemPosition = data.getIntExtra("itemPosition", -1);
+            int deleteButtonNum = data.getIntExtra("deleteButtonNum", 1);
             if(itemPosition != -1)
             {
                 items.set(itemPosition, updatedItem);
                 adapter1.notifyDataSetChanged();
 
+            }
+
+            if(deleteButtonNum == -1)
+            {
+              items.remove(itemPosition);
+              adapter1.notifyDataSetChanged();
             }
         }
 

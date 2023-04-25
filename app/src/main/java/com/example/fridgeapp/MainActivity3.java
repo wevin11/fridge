@@ -82,6 +82,19 @@ public class MainActivity3 extends AppCompatActivity
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra("updatedItem", item);
                 returnIntent.putExtra("itemPosition", itemPosition);
+                returnIntent.putExtra("deleteButtonNum", 1);
+                setResult(RESULT_OK, returnIntent);
+                finish();
+            }
+        });
+
+        deleteButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v)
+            {
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("itemPosition", itemPosition);
+                returnIntent.putExtra("deleteButtonNum", -1);
                 setResult(RESULT_OK, returnIntent);
                 finish();
             }

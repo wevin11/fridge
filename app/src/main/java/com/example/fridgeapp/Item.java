@@ -39,14 +39,7 @@ public class Item implements Parcelable {
         return date;
     }
 
-    public void setDate(int month, int day, int year)
-    {
-        date = month + "-" + day + "-" + year;
-        calDate = new Date(year, month, day);
-        this.month = month;
-        this.year = year;
-        this.day = day;
-    }
+
 
     public Item(String name, String category) {
         this.name = name;
@@ -152,6 +145,14 @@ public class Item implements Parcelable {
         this.brand = brand;
     }
 
+    public void setDate(int month, int day, int year)
+    {
+        date = month + "-" + day + "-" + year;
+        calDate = new Date(year, month, day);
+        this.month = month;
+        this.year = year;
+        this.day = day;
+    }
 
     public void setCategory(String category) {
         this.category = category;
@@ -160,6 +161,7 @@ public class Item implements Parcelable {
     public void setCalDate(Date calDate) {
         this.calDate = calDate;
     }
+
 
     public void setMonth(int month) {
         this.month = month;

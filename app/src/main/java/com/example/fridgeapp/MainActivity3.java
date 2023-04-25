@@ -36,6 +36,7 @@ public class MainActivity3 extends AppCompatActivity
         Button deleteButton = findViewById(R.id.deleteButton);
 
         Item item = getIntent().getParcelableExtra("item");
+        int itemPosition = getIntent().getIntExtra("pos", -1);
 
         itemNameTop.setText(item.getName());
         itemName.setText(item.getName());
@@ -52,7 +53,56 @@ public class MainActivity3 extends AppCompatActivity
             itemDay.setText(String.valueOf(item.getDay()));
             itemYear.setText(String.valueOf(item.getYear()));
         }
+        else
+        {
+            itemMonth.setText(null);
+            itemDay.setText(null);
+            itemYear.setText(null);
+        }
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                item.setName(itemName.getText().toString());
+
+                if(!itemBrand.getText().toString().isEmpty())
+                {
+                    item.setBrand(itemBrand.getText().toString());
+                }
+
+                if(checkDate(itemMonth, itemDay, itemYear, Integer.parseInt(itemMonth.getText().toString()),Integer.parseInt(itemDay.getText().toString())))
+                {
+                  item.setDate(Integer.parseInt(itemMonth.getText().toString()), Integer.parseInt(itemDay.getText().toString()), Integer.parseInt(itemYear.getText().toString()));
+                }
+
+                item.setCategory(itemCategory.getSelectedItem().toString());
+
+
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("updatedItem", item);
+                returnIntent.putExtra("itemPosition", itemPosition);
+                setResult(RESULT_OK, returnIntent);
+                finish();
+            }
+        });
 
 
     }
+
+    public boolean checkDate(EditText inputMonth, EditText inputDay, EditText inputYear, int month, int day)
+    {
+        if(inputMonth.getText().toString().isEmpty() || inputDay.getText().toString().isEmpty() || inputYear.getText().toString().isEmpty())
+            return false;
+
+        if(month < 1 || month > 12)
+            return false;
+
+
+        if(day < 1 || day > 31 )
+            return false;
+
+        return true;
+    }
+
 }

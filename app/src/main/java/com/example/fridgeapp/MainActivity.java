@@ -79,7 +79,18 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
             items.add(newItem);
             sortItems();
             adapter1.notifyDataSetChanged();
-            // Do something with the returned data
+        }
+
+        if(requestCode == 2 && resultCode == RESULT_OK)
+        {
+            Item updatedItem = data.getParcelableExtra("updatedItem");
+            int itemPosition = data.getIntExtra("itemPosition", -1);
+            if(itemPosition != -1)
+            {
+                items.set(itemPosition, updatedItem);
+                adapter1.notifyDataSetChanged();
+
+            }
         }
 
     }
@@ -116,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
 
         Item selectedItem = items.get(pos);
         intent.putExtra("item", selectedItem);
+        intent.putExtra("pos", pos);
         startActivityForResult(intent, 2);
     }
 }

@@ -69,19 +69,10 @@ public class MainActivity2 extends AppCompatActivity
                     itemNumberStr = itemYear.getText().toString();
                     int itemYearInt = Integer.parseInt(itemNumberStr);
 
-                    if(itemMonthInt < 1 || itemMonthInt > 12)
+                    if(checkDate(itemMonthInt, itemDayInt))
                     {
-                        wrongDateText.setVisibility(View.VISIBLE);
-                        return;
+                        newItem = new Item(itemNameStr, itemCategoryStr, itemMonthInt, itemDayInt, itemYearInt);
                     }
-
-                    if(itemDayInt < 1 || itemDayInt > 31 )
-                    {
-                        wrongDateText.setVisibility(View.VISIBLE);
-                        return;
-                    }
-
-                    newItem = new Item(itemNameStr, itemCategoryStr, itemMonthInt, itemDayInt, itemYearInt);
 
                 }
                 else
@@ -91,18 +82,10 @@ public class MainActivity2 extends AppCompatActivity
                     int itemDayInt = Integer.parseInt(itemNumberStr);
                     itemNumberStr = itemYear.getText().toString();
                     int itemYearInt = Integer.parseInt(itemNumberStr);
-                    if(itemMonthInt < 1 || itemMonthInt > 12)
+                    if(checkDate(itemMonthInt, itemDayInt))
                     {
-                        wrongDateText.setVisibility(View.VISIBLE);
-                        return;
+                        newItem = new Item(itemNameStr, itemBrandStr, itemMonthInt, itemDayInt, itemYearInt, itemCategoryStr);
                     }
-
-                    if(itemDayInt < 1 || itemDayInt > 31 )
-                    {
-                        wrongDateText.setVisibility(View.VISIBLE);
-                        return;
-                    }
-                    newItem = new Item(itemNameStr, itemBrandStr, itemMonthInt, itemDayInt, itemYearInt, itemCategoryStr);
 
                 }
                 Intent returnIntent = new Intent();
@@ -112,5 +95,18 @@ public class MainActivity2 extends AppCompatActivity
             }
         });
 
+    }
+
+    public boolean checkDate(int month, int day)
+    {
+
+        if(month < 1 || month > 12)
+            return false;
+
+
+        if(day < 1 || day > 31 )
+            return false;
+
+        return true;
     }
 }

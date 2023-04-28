@@ -24,6 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:backgroundTint="@color/grey"
             android:rotationY="0"
             android:text="Open Fridge" />
 

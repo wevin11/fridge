@@ -39,6 +39,12 @@ public class Item implements Parcelable {
         return date;
     }
 
+    public void clearDate()
+    {
+        date = null;
+    }
+
+
 
 
     public Item(String name, String category) {
@@ -153,6 +159,8 @@ public class Item implements Parcelable {
         this.year = year;
         this.day = day;
     }
+
+
 
     public void setCategory(String category) {
         this.category = category;

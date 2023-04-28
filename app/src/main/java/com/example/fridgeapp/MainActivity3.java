@@ -12,7 +12,6 @@ import java.util.Calendar;
 public class MainActivity3 extends AppCompatActivity
 {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,31 +33,30 @@ public class MainActivity3 extends AppCompatActivity
         Button saveButton = findViewById(R.id.saveButton);
         Button addToListButton = findViewById(R.id.addListButton);
         Button deleteButton = findViewById(R.id.deleteButton);
-
+        TextView wrongDateText = findViewById(R.id.wrongDateText2);
+        wrongDateText.setVisibility(View.INVISIBLE);
         Item item = getIntent().getParcelableExtra("item");
         int itemPosition = getIntent().getIntExtra("pos", -1);
 
         itemNameTop.setText(item.getName());
         itemName.setText(item.getName());
         itemCategory.setSelection(item.getCategoryIndex());
+        itemMonth.setText(null);
+        itemDay.setText(null);
+        itemYear.setText(null);
 
         if(item.getBrand() != null)
         {
             itemBrand.setText(item.getBrand());
         }
 
-        if(item.getCalDate() != null)
+        if(item.getMonth() != 0)
         {
             itemMonth.setText(String.valueOf(item.getMonth()));
             itemDay.setText(String.valueOf(item.getDay()));
             itemYear.setText(String.valueOf(item.getYear()));
         }
-        else
-        {
-            itemMonth.setText(null);
-            itemDay.setText(null);
-            itemYear.setText(null);
-        }
+
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,10 +69,35 @@ public class MainActivity3 extends AppCompatActivity
                     item.setBrand(itemBrand.getText().toString());
                 }
 
-                if(checkDate(itemMonth, itemDay, itemYear, Integer.parseInt(itemMonth.getText().toString()),Integer.parseInt(itemDay.getText().toString())))
+                String itemMonthStr = itemMonth.getText().toString();
+                String itemDayStr = itemDay.getText().toString();
+                String itemYearStr = itemYear.getText().toString();
+
+                if(!itemMonthStr.isEmpty() && !itemDayStr.isEmpty() && !itemYearStr.isEmpty())
                 {
-                  item.setDate(Integer.parseInt(itemMonth.getText().toString()), Integer.parseInt(itemDay.getText().toString()), Integer.parseInt(itemYear.getText().toString()));
+                        int itemMonthInt = Integer.parseInt(itemMonthStr);
+                        int itemDayInt = Integer.parseInt(itemDayStr);
+                        int itemYearInt = Integer.parseInt(itemYearStr);
+
+                        if (checkDate(itemMonthInt, itemDayInt, itemYearInt)) {
+                            item.setDate(itemMonthInt, itemDayInt, itemYearInt);
+                        } else {
+                            wrongDateText.setVisibility(View.VISIBLE);
+                            return;
+                        }
+
+
                 }
+                else if(itemMonthStr.isEmpty() && itemDayStr.isEmpty() && itemYearStr.isEmpty())
+                {
+                    item.clearDate();
+                }
+                else
+                {
+                    wrongDateText.setVisibility(View.VISIBLE);
+                    return;
+                }
+
 
                 item.setCategory(itemCategory.getSelectedItem().toString());
 
@@ -103,19 +126,12 @@ public class MainActivity3 extends AppCompatActivity
 
     }
 
-    public boolean checkDate(EditText inputMonth, EditText inputDay, EditText inputYear, int month, int day)
+    public boolean checkDate(int month, int day, int year)
     {
-        if(inputMonth.getText().toString().isEmpty() || inputDay.getText().toString().isEmpty() || inputYear.getText().toString().isEmpty())
+        if((month > 0 && month < 13) && (day > 0 && day < 32) && (year >= 2023))
+            return true;
+        else
             return false;
-
-        if(month < 1 || month > 12)
-            return false;
-
-
-        if(day < 1 || day > 31 )
-            return false;
-
-        return true;
     }
 
 }

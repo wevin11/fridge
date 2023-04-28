@@ -47,7 +47,9 @@ public class MainActivity2 extends AppCompatActivity
                 String itemCategoryStr = itemCategory.getSelectedItem().toString();
                 String itemNameStr = itemName.getText().toString();
                 String itemBrandStr = itemBrand.getText().toString();
-                String itemNumberStr = itemMonth.getText().toString();
+                String itemMonthStr = itemMonth.getText().toString();
+                String itemDayStr = itemDay.getText().toString();
+                String itemYearStr = itemYear.getText().toString();
 
                 if (itemNameStr.isEmpty() ){
                     noInfoText.setVisibility(View.VISIBLE); // show the noInfoText
@@ -56,37 +58,53 @@ public class MainActivity2 extends AppCompatActivity
 
                 Item newItem = new Item(itemNameStr, itemCategoryStr);
 
-                if(itemNumberStr.isEmpty())
+                if(itemMonthStr.isEmpty() && itemDayStr.isEmpty() && itemYearStr.isEmpty())
                 {
                     newItem = new Item(itemNameStr, itemBrandStr, itemCategoryStr);
 
                 }
                 else if(itemBrandStr.isEmpty())
                 {
-                    int itemMonthInt = Integer.parseInt(itemNumberStr);
-                    itemNumberStr = itemDay.getText().toString();
-                    int itemDayInt = Integer.parseInt(itemNumberStr);
-                    itemNumberStr = itemYear.getText().toString();
-                    int itemYearInt = Integer.parseInt(itemNumberStr);
+                    if(checkEmptyDate(itemMonthStr, itemDayStr, itemYearStr)) {
+                        int itemMonthInt = Integer.parseInt(itemMonthStr);
+                        int itemDayInt = Integer.parseInt(itemDayStr);
+                        int itemYearInt = Integer.parseInt(itemYearStr);
 
-                    if(checkDate(itemMonthInt, itemDayInt))
+                        if (checkDate(itemMonthInt, itemDayInt, itemYearInt))
+                        {
+                            newItem = new Item(itemNameStr, itemCategoryStr, itemMonthInt, itemDayInt, itemYearInt);
+                        }
+                        else {
+                            wrongDateText.setVisibility(View.VISIBLE);
+                            return;
+                        }
+                    }
+                    else
                     {
-                        newItem = new Item(itemNameStr, itemCategoryStr, itemMonthInt, itemDayInt, itemYearInt);
+                        wrongDateText.setVisibility(View.VISIBLE);
+                        return;
                     }
 
                 }
                 else
                 {
-                    int itemMonthInt = Integer.parseInt(itemNumberStr);
-                    itemNumberStr = itemDay.getText().toString();
-                    int itemDayInt = Integer.parseInt(itemNumberStr);
-                    itemNumberStr = itemYear.getText().toString();
-                    int itemYearInt = Integer.parseInt(itemNumberStr);
-                    if(checkDate(itemMonthInt, itemDayInt))
-                    {
-                        newItem = new Item(itemNameStr, itemBrandStr, itemMonthInt, itemDayInt, itemYearInt, itemCategoryStr);
+                    if(checkEmptyDate(itemMonthStr, itemDayStr, itemYearStr)) {
+                        int itemMonthInt = Integer.parseInt(itemMonthStr);
+                        int itemDayInt = Integer.parseInt(itemDayStr);
+                        int itemYearInt = Integer.parseInt(itemYearStr);
+                        if (checkDate(itemMonthInt, itemDayInt, itemYearInt)) {
+                            newItem = new Item(itemNameStr, itemBrandStr, itemMonthInt, itemDayInt, itemYearInt, itemCategoryStr);
+                        }
+                        else {
+                            wrongDateText.setVisibility(View.VISIBLE);
+                            return;
+                        }
                     }
-
+                    else
+                    {
+                        wrongDateText.setVisibility(View.VISIBLE);
+                        return;
+                    }
                 }
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra("newItem", newItem);
@@ -97,16 +115,32 @@ public class MainActivity2 extends AppCompatActivity
 
     }
 
-    public boolean checkDate(int month, int day)
+    public boolean checkDate(int month, int day, int year)
     {
-
-        if(month < 1 || month > 12)
+        if((month > 0 && month < 13) && (day > 0 && day < 32) && (year >= 2023))
+            return true;
+        else
             return false;
 
-
-        if(day < 1 || day > 31 )
-            return false;
-
-        return true;
     }
+
+    public boolean checkEmptyDate(String month, String day, String year)
+    {
+        int emptyCount = 0;
+
+        if(month.isEmpty())
+            ++emptyCount;
+
+        if(day.isEmpty())
+            ++emptyCount;
+
+        if(year.isEmpty())
+            ++emptyCount;
+
+        if(emptyCount > 0)
+            return false;
+        else
+            return true;
+    }
+
 }

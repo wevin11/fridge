@@ -171,6 +171,20 @@
                     android:textColor="@color/black"
                     android:textColorHint="@color/black" />
 
+                <TextView
+                    android:id="@+id/wrongDateText2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="100dp"
+                    android:layout_weight="1"
+                    android:text="!"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
             </LinearLayout>
 
         </LinearLayout>

@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
@@ -122,8 +123,6 @@ public class Item implements Parcelable {
     {
         switch(category)
         {
-            case "Other":
-                return 0;
             case "Dairy":
                 return 1;
             case "Produce":
@@ -210,9 +209,18 @@ public class Item implements Parcelable {
         @Override
         public int compare(Item i1, Item i2)
         {
-            if (i1.getCalDate() == null || i2.getCalDate() == null)
+            Date date1 = i1.getCalDate();
+            Date date2 = i2.getCalDate();
+
+            if (date1 == null && date2 == null) {
                 return 0;
-            return i1.getCalDate().compareTo(i2.getCalDate());
+            } else if (date1 == null) {
+                return 1;
+            } else if (date2 == null) {
+                return -1;
+            } else {
+                return date1.compareTo(date2);
+            }
         }
 
     };

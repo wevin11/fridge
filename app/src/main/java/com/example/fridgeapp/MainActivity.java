@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
 
         Button addItem = findViewById(R.id.addItem);
 
+        //createItems(items);
+
 
         Intent secondIntent = new Intent(this, MainActivity2.class);
 
@@ -98,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
               items.remove(itemPosition);
               adapter1.notifyDataSetChanged();
             }
+            sortItems();
         }
 
     }
@@ -137,4 +140,51 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
         intent.putExtra("pos", pos);
         startActivityForResult(intent, 2);
     }
+
+    public void createItems(ArrayList<Item> itemList)
+    {
+        itemList.add(new Item("Milk", "Brand A", 4, 30, 2023, "Dairy"));
+        itemList.add(new Item("Cream", "Brand B", 5, 1, 2023, "Dairy"));
+        itemList.add(new Item("Cheese", "Brand C", 7, 15, 2023, "Dairy"));
+        itemList.add(new Item("Apple", "Brand A", 4, 30, 2023, "Produce"));
+        itemList.add(new Item("Banana", "Brand B", 5, 1, 2023, "Produce"));
+        itemList.add(new Item("Zucchini", "Brand C", 5, 15, 2023, "Produce"));
+        itemList.add(new Item("Chicken", "Brand A", 4, 30, 2023, "Meats"));
+        itemList.add(new Item("Steak", "Brand B", 5, 1, 2023, "Meats"));
+        itemList.add(new Item("Fish", "Brand C", 5, 15, 2023, "Meats"));
+        itemList.add(new Item("Water", "Brand A","Beverages"));
+        itemList.add(new Item("Coke", "Brand B", 5, 1, 2023, "Beverages"));
+        itemList.add(new Item("Juice", "Brand C","Beverages"));
+        itemList.add(new Item("Bread", "Brand A", 4, 30, 2023, "Other"));
+        itemList.add(new Item("Peanut Butter", "Brand B", 5, 1, 2023, "Other"));
+        itemList.add(new Item("Candy", "Brand C", "Other"));
+        itemList.add(new Item("Milk", "Brand A", 4, 30, 2023, "Dairy"));
+        itemList.add(new Item("Yogurt", "Dairy", 5, 1, 2023));
+        itemList.add(new Item("Cheese", "Brand C", 5, 15, 2023, "Dairy"));
+        itemList.add(new Item("Orange Juice", "Brand D", 5, 15, 2023, "Beverages"));
+        itemList.add(new Item("Apple Juice", "Brand E", 5, 15, 2023, "Beverages"));
+        itemList.add(new Item("Soda", "Brand F", 5, 15, 2023, "Beverages"));
+        itemList.add(new Item("Ketchup", "Brand G", 5, 15, 2023, "Other"));
+        itemList.add(new Item("Mustard", "Brand H", 5, 15, 2023, "Other"));
+        itemList.add(new Item("Mayonnaise", "Brand I", 5, 15, 2023, "Other"));
+        itemList.add(new Item("Barbecue Sauce","Other", 5, 15, 2023));
+        itemList.add(new Item("Ranch Dressing", "Brand K", 5, 15, 2023, "Other"));
+        itemList.add(new Item("Italian Dressing", "Brand L", 5, 15, 2023, "Other"));
+        itemList.add(new Item("Honey Mustard", "Brand M", 5, 15, 2023, "Other"));
+        itemList.add(new Item("Salmon", "Brand N", 5, 15, 2023, "Meats"));
+        itemList.add(new Item("Chicken", "Meats", 5, 15, 2023));
+        itemList.add(new Item("Beef", "Brand P", 5, 15, 2023, "Meats"));
+        itemList.add(new Item("Pork", "Brand Q", 5, 15, 2023, "Meats"));
+        itemList.add(new Item("Bacon", "Brand R", 5, 15, 2023, "Meats"));
+        itemList.add(new Item("Sausage", "Brand S", 5, 15, 2023, "Meats"));
+        itemList.add(new Item("Eggs", "Brand T", "Produce"));
+        itemList.add(new Item("Lettuce","Produce"));
+        itemList.add(new Item("Tomatoes", "Brand V", "Produce"));
+        itemList.add(new Item("Potatoes", "Brand W", "Produce"));
+        itemList.add(new Item("Onions","Produce"));
+        itemList.add(new Item("Carrots", "Brand Y", "Produce"));
+        itemList.add(new Item("Oranges", "Brand Z", "Produce"));
+        itemList.add(new Item("Grapes", "Produce"));
+    }
+
 }
